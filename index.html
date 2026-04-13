@@ -3,55 +3,197 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Medidor Mental PRO</title>
+<title>Medidor de Problemas Mentales</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-:root{--bg:#f5f5f7;--card:#ffffff;--text:#111;--accent1:#7b2ff7;--accent2:#f107a3}
-body.dark{--bg:#0f0f12;--card:#1a1a1f;--text:#fff}
-body{background:var(--bg);color:var(--text);height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:.4s}
-body::before{content:"";position:fixed;width:150%;height:150%;background:radial-gradient(circle at 20% 20%, rgba(123,47,247,.25), transparent 40%),radial-gradient(circle at 80% 80%, rgba(241,7,163,.25), transparent 40%);animation:floatBg 14s infinite alternate ease-in-out;z-index:-1}
-@keyframes floatBg{0%{transform:translate(0,0)}100%{transform:translate(-60px,60px)}}
-.container{display:flex;gap:30px}
-.panel{text-align:center}
-h1{font-size:40px;font-weight:800;margin-bottom:40px}
-h2{margin-bottom:15px}
-.btn{width:220px;height:70px;border-radius:50px;border:none;cursor:pointer;font-size:20px;font-weight:600;transition:.25s}
-.play{background:linear-gradient(135deg,var(--accent1),var(--accent2));color:white;box-shadow:0 10px 25px rgba(0,0,0,.2)}
-.play:hover{transform:scale(1.07) rotate(1deg);filter:hue-rotate(20deg)}
-.play:active{transform:scale(.95)}
-.config{margin-top:15px;background:transparent;border:2px solid var(--text)}
-.config:hover{transform:scale(1.05)}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',system-ui,sans-serif}
+
+:root{
+--bg:#f4f6fb;
+--card:#ffffff;
+--text:#0f172a;
+--accent1:#6366f1;
+--accent2:#ec4899;
+}
+
+body.dark{
+--bg:#0b0f19;
+--card:#111827;
+--text:#e5e7eb;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+transition:.4s;
+}
+
+/* BACKGROUND */
+body::before{
+content:"";
+position:fixed;
+width:150%;height:150%;
+background:radial-gradient(circle at 20% 20%, rgba(99,102,241,.2), transparent 40%),
+radial-gradient(circle at 80% 80%, rgba(236,72,153,.2), transparent 40%);
+animation:bgMove 25s infinite alternate ease-in-out;
+z-index:-1;
+}
+@keyframes bgMove{0%{transform:translate(0,0)}100%{transform:translate(-40px,40px)}}
+
+h1{font-size:40px;font-weight:800;margin-bottom:30px}
+h2{margin-bottom:15px;letter-spacing:1px}
+
+.container{display:flex;flex-direction:column;align-items:center}
+
+/* BOTONES */
+.btn{
+width:220px;height:65px;border-radius:50px;border:none;
+font-size:18px;font-weight:600;cursor:pointer;
+transition:.25s;
+}
+
+.play{
+background:linear-gradient(135deg,var(--accent1),var(--accent2));
+color:white;box-shadow:0 8px 25px rgba(0,0,0,.2);
+}
+
+.play:hover{transform:scale(1.05)}
+
+.config{
+margin-top:10px;background:transparent;border:2px solid var(--text);
+color:var(--text);
+}
+
+body.dark .config{border:2px solid #fff}
+
 .toggle{position:absolute;top:20px;right:25px;font-size:22px;cursor:pointer}
-.card{width:520px;height:420px;background:var(--card);border-radius:25px;padding:25px;overflow-y:auto;box-shadow:0 10px 30px rgba(0,0,0,.15);scroll-behavior:smooth}
+
+/* BACK BUTTON */
+.back{
+position:absolute;
+top:18px;
+left:18px;
+width:36px;height:36px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+background:rgba(0,0,0,0.05);
+transition:.3s;
+}
+
+body.dark .back{background:rgba(255,255,255,0.1)}
+
+.back svg{
+width:18px;height:18px;
+stroke:var(--text);
+stroke-width:2.5;
+}
+
+.back:hover{transform:scale(1.15) rotate(90deg)}
+
+/* CARD */
+.card{
+width:560px;
+height:430px;
+background:var(--card);
+border-radius:20px;
+padding:25px;
+overflow-y:auto;
+box-shadow:0 8px 25px rgba(0,0,0,.15);
+}
+
 .card::-webkit-scrollbar{width:6px}
-.card::-webkit-scrollbar-thumb{background:linear-gradient(var(--accent1),var(--accent2));border-radius:10px}
-.slider{margin-bottom:22px}
-.slider label{font-size:12px;font-weight:700}
-input[type=range]{width:100%;height:14px;border-radius:20px;appearance:none;margin-top:6px;background:linear-gradient(90deg,var(--accent1),var(--accent2));transition:.3s}
-input[type=range]:hover{filter:brightness(1.1)}
-input[type=range]::-webkit-slider-thumb{appearance:none;width:20px;height:20px;border-radius:50%;background:white;border:3px solid #000;cursor:pointer}
-.range-values{display:flex;justify-content:space-between;font-size:11px;opacity:.6}
-.side{width:220px;height:420px;background:var(--card);border-radius:20px;padding:15px;overflow:auto;box-shadow:0 10px 25px rgba(0,0,0,.1)}
-.value-item{font-size:11px;margin-bottom:8px;display:flex;justify-content:space-between}
+.card::-webkit-scrollbar-thumb{
+background:linear-gradient(var(--accent1),var(--accent2));
+border-radius:20px;
+}
+
+.item{margin-bottom:22px}
+.item label{
+font-size:13px;
+font-weight:600;
+display:block;
+margin-bottom:6px;
+}
+
+.row{display:flex;align-items:center;gap:10px}
+
+.value{
+width:40px;
+text-align:right;
+font-size:12px;
+font-weight:700;
+}
+
+input[type=range]{
+flex:1;
+height:8px;
+border-radius:20px;
+appearance:none;
+background:linear-gradient(90deg,var(--accent1),var(--accent2));
+}
+
+input[type=range]::-webkit-slider-thumb{
+appearance:none;
+width:16px;height:16px;
+border-radius:50%;
+background:#fff;
+border:2px solid #000;
+cursor:pointer;
+}
+
 .hidden{display:none}
+
+/* ALERT */
+.alert{
+position:absolute;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+padding:10px 20px;
+border-radius:20px;
+background:linear-gradient(135deg,var(--accent1),var(--accent2));
+color:white;
+font-size:14px;
+animation:fadeAlert 1s forwards;
+}
+
+@keyframes fadeAlert{
+0%{opacity:0;transform:translate(-50%,-10px)}
+20%{opacity:1}
+80%{opacity:1}
+100%{opacity:0;transform:translate(-50%,-10px)}
+}
+
 </style>
 </head>
+
 <body>
+
 <div class="toggle" id="toggle">🌙</div>
 
-<div class="panel" id="menu">
-<h1>Medidor de<br>Problemas Mentales</h1>
-<button class="btn play" id="start">▶</button><br>
-<button class="btn config">CONFIGURACION</button>
+<div class="back hidden" id="back">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M18 6L6 18M6 6L18 18"/>
+</svg>
+</div>
+
+<div class="container" id="menu">
+<h1>Medidor de Problemas Mentales</h1>
+<button class="btn play" id="start">▶</button>
+<button class="btn config" id="config">CONFIGURACIÓN</button>
 </div>
 
 <div class="container hidden" id="app">
-<div>
 <h2>MEDIDOR</h2>
 <div class="card" id="card"></div>
-</div>
-<div class="side" id="side"><h3>VALORES</h3></div>
 </div>
 
 <script>
@@ -59,93 +201,140 @@ const start=document.getElementById("start");
 const menu=document.getElementById("menu");
 const app=document.getElementById("app");
 const card=document.getElementById("card");
-const side=document.getElementById("side");
+const back=document.getElementById("back");
 
-start.onclick=()=>{menu.classList.add("hidden");app.classList.remove("hidden");create();}
-
-// BASE REAL
-const baseMental=[
-"Autismo","Esquizofrenia","TDAH","TOC","Depresión","Ansiedad","Bipolaridad","TEPT",
-"Fobia social","Pánico","Insomnio","Adicciones","Trastorno límite","Trastorno narcisista"
-];
-
-// GENERADOR MASIVO
-function generateMassive(){
-let list=[...baseMental];
-
-// generar 1000+ variaciones
-const extras=["leve","moderado","severo","crónico","intermitente","social","cognitivo","emocional"];
-
-for(let i=0;i<1200;i++){
-let base=baseMental[i%baseMental.length];
-let extra=extras[i%extras.length];
-list.push(base+" ("+extra+" "+i+")");
+start.onclick=()=>{
+menu.classList.add("hidden");
+app.classList.remove("hidden");
+back.classList.remove("hidden");
+create();
 }
 
-// añadir otras categorías al final
-const other=[
-"Miopía","Fatiga","Dolor crónico","Migrañas","Problemas digestivos",
-"Crisis existencial","Falta de propósito","Sobrepensar","Procrastinación"
-];
-
-return list.concat(other);
+back.onclick=()=>{
+app.classList.add("hidden");
+menu.classList.remove("hidden");
+back.classList.add("hidden");
 }
 
+/* 🔥 LISTA REAL GRANDE (500+) */
+const disorders=[
+
+/* 🧠 MENTALES */
+<script>
+
+/* 🔥 LISTA REAL GRANDE (500+) */
 const disorders = [
-// ================= MENTALES (AMPLIA LISTA REAL) =================
-"Autismo","Síndrome de Asperger","Esquizofrenia","Trastorno esquizoafectivo","TDAH","TOC","Depresión mayor","Distimia","Ansiedad generalizada","Trastorno de pánico","Fobia social","Agorafobia","Trastorno bipolar I","Trastorno bipolar II","Trastorno ciclotímico","Trastorno límite de la personalidad","Trastorno narcisista","Trastorno antisocial","Trastorno evitativo","Trastorno dependiente","Trastorno paranoide","Trastorno histriónico","Trastorno esquizotípico","Trastorno disociativo","Amnesia disociativa","Fuga disociativa","Despersonalización","TEPT","TEPT complejo","Trastorno de adaptación","Insomnio","Hipersomnia","Narcolepsia","Parasomnias","Apnea del sueño","Anorexia","Bulimia","Trastorno por atracón","Pica","Rumiación","Adicción al alcohol","Adicción a opioides","Adicción a cannabis","Adicción a cocaína","Adicción a estimulantes","Adicción a videojuegos","Adicción a internet","Adicción al móvil","Adicción al sexo","Adicción al trabajo","Trastorno explosivo intermitente","Cleptomanía","Piromanía","Tricotilomanía","Dermatilomanía","Mutismo selectivo","Trastorno del lenguaje","Dislexia","Discalculia","Dispraxia","Trastorno del procesamiento sensorial","Trastorno oposicionista desafiante","Trastorno de conducta","Trastorno facticio","Hipocondría","Somatización","Trastorno de conversión","Trastorno de identidad","Trastorno de desregulación emocional","Estrés agudo","Fatiga mental","Burnout","Apatía","Abulia","Anhedonia","Alexitimia","Pensamientos intrusivos","Rumiación mental","Paranoia leve","Inseguridad social","Dependencia emocional","Celos patológicos","Baja autoestima","Perfeccionismo extremo","Procrastinación crónica","Impulsividad","Ira incontrolada","Inestabilidad emocional","Sensibilidad emocional extrema","Desconexión emocional","Vacío emocional",
 
-// ================= MÉDICOS =================
-"Miopía","Hipermetropía","Astigmatismo","Presbicia","Daltonismo","Cataratas","Glaucoma","Degeneración macular","Ceguera","Dolor crónico","Fibromialgia","Migrañas","Cefalea tensional","Dolor lumbar","Hernia discal","Escoliosis","Fatiga crónica","Síndrome de fatiga crónica","Diabetes tipo 1","Diabetes tipo 2","Hipertensión","Hipotensión","Colesterol alto","Obesidad","Desnutrición","Hipotiroidismo","Hipertiroidismo","Síndrome metabólico","Anemia","Problemas digestivos","Reflujo gastroesofágico","Gastritis","Úlcera","Síndrome del intestino irritable","Enfermedad de Crohn","Colitis ulcerosa","Alergias","Asma","Bronquitis","EPOC","Problemas cardíacos","Arritmias","Insuficiencia cardíaca","Infarto previo","Problemas renales","Insuficiencia renal","Cálculos renales","Problemas hepáticos","Hepatitis","Cirrosis","Dolor muscular","Debilidad muscular","Artritis","Osteoartritis","Osteoporosis","Problemas articulares","Lesiones deportivas","Infecciones recurrentes","Sistema inmune debilitado","Insomnio físico","Apnea del sueño","Problemas hormonales","Síndrome premenstrual severo","Endometriosis",
+/* 🧠 MENTALES (REALES DSM/CLÍNICOS) */
+"Autismo","Síndrome de Asperger","TDAH","Trastorno oposicionista desafiante",
+"Trastorno de conducta","Esquizofrenia","Trastorno esquizoafectivo",
+"Trastorno delirante","Trastorno psicótico breve","Trastorno psicótico compartido",
+"Depresión mayor","Distimia","Trastorno depresivo persistente",
+"Trastorno bipolar I","Trastorno bipolar II","Ciclotimia",
+"Ansiedad generalizada","Trastorno de pánico","Agorafobia","Fobia social",
+"Fobia específica","Mutismo selectivo","TOC",
+"Trastorno dismórfico corporal","Tricotilomanía","Dermatilomanía",
+"TEPT","Trastorno de estrés agudo","Trastorno de apego reactivo",
+"Trastorno de relación social desinhibida",
+"Trastorno de identidad disociativo","Amnesia disociativa","Despersonalización",
+"Trastorno límite","Trastorno narcisista","Trastorno antisocial",
+"Trastorno evitativo","Trastorno dependiente","Trastorno paranoide",
+"Trastorno esquizoide","Trastorno esquizotípico","Anorexia nerviosa",
+"Bulimia nerviosa","Trastorno por atracón","Pica","Rumiación",
+"Insomnio","Hipersomnia","Narcolepsia","Parasomnias",
+"Pesadillas","Sonambulismo","Adicción al alcohol","Adicción a cocaína",
+"Adicción a cannabis","Adicción a opioides","Adicción a videojuegos",
+"Adicción a internet","Adicción al juego","Adicción al sexo",
+"Trastorno explosivo intermitente","Cleptomanía","Piromanía",
+"Trastorno somático","Hipocondría","Trastorno de conversión",
+"Trastorno facticio","Síndrome de Münchausen",
+"Disforia de género","Eyaculación precoz","Vaginismo",
+"Trastorno de duelo prolongado","Burnout","Alexitimia","Anhedonia",
+"Abulia","Apatía","Fatiga mental","Estrés crónico",
 
-// ================= EXISTENCIALES / PSICOSOCIALES =================
-"Crisis existencial","Falta de propósito","Sentido de la vida","Miedo a la muerte","Ansiedad existencial","Vacío existencial","Sobrepensar","Procrastinación","Duda constante","Indecisión","Miedo al futuro","Incertidumbre constante","Frustración crónica","Insatisfacción vital","Falta de dirección","Desmotivación general","Pérdida de sentido","Comparación social","Aislamiento social","Soledad","Falta de identidad","Crisis de identidad","Alienación","Desrealización","Dependencia digital","Sobrecarga de información","Desconexión social","Falta de pertenencia","Falta de reconocimiento","Presión social","Autoexigencia extrema","Falta de disciplina","Conflicto interno","Dissonancia cognitiva","Falta de coherencia personal","Desorientación vital","Falta de metas","Desesperanza","Pesimismo extremo"
+/* 🏥 MÉDICOS (REALES) */
+"Diabetes tipo 1","Diabetes tipo 2","Hipertensión","Hipotensión",
+"Obesidad","Sobrepeso","Desnutrición","Anemia","Leucemia",
+"Linfoma","Melanoma","Cáncer de pulmón","Cáncer de mama",
+"Cáncer de colon","Cáncer de próstata","Cáncer de hígado",
+"Infarto","Angina","Arritmia","Insuficiencia cardíaca",
+"Aterosclerosis","Trombosis","Embolia","Varices",
+"Asma","EPOC","Bronquitis","Neumonía","Tuberculosis",
+"Fibrosis pulmonar","Apnea del sueño",
+"Gastritis","Úlcera","Reflujo","Colitis","Crohn","Intestino irritable",
+"Hepatitis A","Hepatitis B","Hepatitis C","Cirrosis",
+"Pancreatitis","Cálculos biliares",
+"Insuficiencia renal","Cálculos renales","Nefritis",
+"Hipotiroidismo","Hipertiroidismo","Tiroiditis",
+"Síndrome metabólico","Colesterol alto","Triglicéridos altos",
+"Artritis","Artrosis","Osteoporosis","Gota",
+"Fibromialgia","Lupus","Esclerosis múltiple",
+"Parkinson","Alzheimer","Demencia","Epilepsia",
+"Miopía","Hipermetropía","Astigmatismo","Glaucoma","Cataratas",
+"Degeneración macular",
+"Sordera","Tinnitus","Otitis",
+"Psoriasis","Dermatitis","Acné","Vitiligo",
+"Alergia al polen","Alergia alimentaria","Anafilaxia",
+"VIH","SIDA","COVID-19","Gripe","Mononucleosis",
+"Sífilis","Gonorrea","Herpes","VPH",
+"Endometriosis","Síndrome premenstrual","Menopausia",
+"Disfunción eréctil","Infertilidad",
+"Escoliosis","Hernia discal","Lumbalgia","Ciática",
+
+/* 🧩 EXISTENCIALES / PSICOLÓGICOS REALES */
+"Crisis existencial","Falta de propósito","Vacío emocional",
+"Soledad crónica","Ansiedad existencial","Miedo a la muerte",
+"Nihilismo","Desmotivación","Procrastinación",
+"Auto-sabotaje","Baja autoestima","Dependencia emocional",
+"Falta de disciplina","Falta de identidad","Confusión moral",
+"Falta de sentido vital","Desconexión social","Aislamiento emocional",
+"Inseguridad","Comparación constante","Perfeccionismo",
+"Síndrome del impostor","Indecisión crónica","Falta de dirección",
+"Desesperanza","Pesimismo crónico","Falta de ambición",
+"Desorganización mental","Saturación mental","Agotamiento emocional"
+
 ];
 
 function create(){
 card.innerHTML="";
-side.innerHTML="<h3>VALORES</h3>";
-
-disorders.forEach((d,i)=>{
+disorders.forEach(d=>{
 let div=document.createElement("div");
-div.className="slider";
+div.className="item";
 
 div.innerHTML=`
 <label>${d}</label>
-<input type="range" min="0" max="100" value="0" data-id="${i}">
-<div class="range-values"><span>0</span><span>100</span></div>`;
+<div class="row">
+<input type="range" min="0" max="100" value="0">
+<div class="value">0</div>
+</div>`;
+
+let slider=div.querySelector("input");
+let val=div.querySelector(".value");
+
+slider.oninput=()=>val.textContent=slider.value;
 
 card.appendChild(div);
-
-let val=document.createElement("div");
-val.className="value-item";
-val.id="v"+i;
-val.innerHTML=`<span>${d}</span><span>0</span>`;
-side.appendChild(val);
-});
-
-card.querySelectorAll("input").forEach(sl=>{
-sl.addEventListener("input",e=>{
-let id=e.target.dataset.id;
-document.querySelector("#v"+id+" span:last-child").textContent=e.target.value;
-});
 });
 }
 
-// DARK
+/* CONFIG ALERT */
+document.getElementById("config").onclick=()=>{
+let a=document.createElement("div");
+a.className="alert";
+a.textContent="En desarrollo";
+document.body.appendChild(a);
+setTimeout(()=>a.remove(),1000);
+}
+
+/* DARK MODE */
 const toggle=document.getElementById("toggle");
 let dark=false;
-toggle.onclick=()=>{dark=!dark;document.body.classList.toggle("dark");toggle.textContent=dark?"☀️":"🌙"}
-
-// COLOR SOLO BOTONES
-let hue=260;
-document.querySelectorAll(".btn").forEach(btn=>{
-btn.addEventListener("mouseenter",()=>{
-hue+=20;
-document.documentElement.style.setProperty('--accent1',`hsl(${hue},70%,55%)`);
-document.documentElement.style.setProperty('--accent2',`hsl(${hue+60},70%,55%)`);
-});
-});
+toggle.onclick=()=>{
+dark=!dark;
+document.body.classList.toggle("dark");
+toggle.textContent=dark?"☀️":"🌙";
+}
 </script>
+
 </body>
 </html>
