@@ -91,7 +91,19 @@ const other=[
 return list.concat(other);
 }
 
-const disorders=generateMassive();
+const disorders = [
+// MENTALES (muchos)
+"Autismo","Síndrome de Asperger","Esquizofrenia","Trastorno esquizoafectivo","TDAH","TOC","Depresión mayor","Distimia","Ansiedad generalizada","Trastorno de pánico","Fobia social","Agorafobia","Trastorno bipolar I","Trastorno bipolar II","Trastorno límite de la personalidad","Trastorno narcisista","Trastorno antisocial","Trastorno evitativo","Trastorno dependiente","Trastorno paranoide","Trastorno disociativo","Amnesia disociativa","Despersonalización","TEPT","TEPT complejo","Trastorno de adaptación","Insomnio","Hipersomnia","Narcolepsia","Trastornos alimenticios","Anorexia","Bulimia","Trastorno por atracón","Adicción al alcohol","Adicción a drogas","Adicción al juego","Adicción a internet","Adicción al móvil","Trastorno explosivo intermitente","Cleptomanía","Piromanía","Tricotilomanía","Dermatilomanía",
+
+// MUCHOS MÁS (variados reales)
+"Ansiedad social leve","Ansiedad social severa","Depresión leve","Depresión severa","Burnout","Fatiga mental","Estrés crónico","Baja autoestima","Dependencia emocional","Celos patológicos","Miedo al abandono","Perfeccionismo extremo","Pensamiento obsesivo","Rumiación mental","Procrastinación crónica","Falta de motivación","Apatía","Inseguridad social","Timidez extrema","Ira incontrolada","Problemas de concentración","Problemas de memoria","Confusión mental","Pensamientos intrusivos","Impulsividad","Inestabilidad emocional","Sensibilidad extrema","Falta de empatía","Desconexión emocional","Vacío emocional",
+
+// MÉDICOS
+"Miopía","Hipermetropía","Astigmatismo","Ceguera parcial","Dolor crónico","Fibromialgia","Migrañas","Dolor de espalda","Hernia discal","Problemas cervicales","Fatiga crónica","Síndrome de fatiga crónica","Diabetes tipo 1","Diabetes tipo 2","Hipertensión","Hipotensión","Colesterol alto","Problemas digestivos","Reflujo","Gastritis","Úlcera","Síndrome del intestino irritable","Alergias","Asma","Bronquitis","Problemas cardíacos","Arritmias","Insuficiencia cardíaca","Obesidad","Desnutrición","Problemas hormonales","Hipotiroidismo","Hipertiroidismo","Problemas renales","Insuficiencia renal","Problemas hepáticos","Dolor muscular","Debilidad física","Problemas articulares","Artritis","Osteoporosis",
+
+// EXISTENCIALES / RANDOM
+"Crisis existencial","Falta de propósito","Sentido de la vida","Miedo a la muerte","Ansiedad existencial","Sobrepensar","Procrastinación","Vacío existencial","Confusión ideológica","Duda constante","Indecisión","Miedo al futuro","Nostalgia excesiva","Aislamiento social","Soledad","Falta de identidad","Crisis de identidad","Comparación social","Dependencia digital","Sobrecarga de información","Desmotivación general","Pérdida de sentido","Falta de dirección","Incertidumbre constante","Frustración crónica","Insatisfacción vital","Autoexigencia extrema","Desconexión social","Alienación","Desrealización cotidiana"
+];
 
 function create(){
 card.innerHTML="";
