@@ -33,7 +33,6 @@ overflow:hidden;
 transition:.4s;
 }
 
-/* BACKGROUND */
 body::before{
 content:"";
 position:fixed;
@@ -50,7 +49,6 @@ h2{margin-bottom:15px;letter-spacing:1px}
 
 .container{display:flex;flex-direction:column;align-items:center}
 
-/* BOTONES */
 .btn{
 width:220px;height:65px;border-radius:50px;border:none;
 font-size:18px;font-weight:600;cursor:pointer;
@@ -73,7 +71,6 @@ body.dark .config{border:2px solid #fff}
 
 .toggle{position:absolute;top:20px;right:25px;font-size:22px;cursor:pointer}
 
-/* BACK BUTTON */
 .back{
 position:absolute;
 top:18px;
@@ -98,7 +95,6 @@ stroke-width:2.5;
 
 .back:hover{transform:scale(1.15) rotate(90deg)}
 
-/* CARD */
 .card{
 width:560px;
 height:430px;
@@ -151,7 +147,6 @@ cursor:pointer;
 
 .hidden{display:none}
 
-/* ALERT */
 .alert{
 position:absolute;
 top:20px;
@@ -171,7 +166,6 @@ animation:fadeAlert 1s forwards;
 80%{opacity:1}
 100%{opacity:0;transform:translate(-50%,-10px)}
 }
-
 </style>
 </head>
 
@@ -197,32 +191,8 @@ animation:fadeAlert 1s forwards;
 </div>
 
 <script>
-const start=document.getElementById("start");
-const menu=document.getElementById("menu");
-const app=document.getElementById("app");
-const card=document.getElementById("card");
-const back=document.getElementById("back");
 
-start.onclick=()=>{
-menu.classList.add("hidden");
-app.classList.remove("hidden");
-back.classList.remove("hidden");
-create();
-}
-
-back.onclick=()=>{
-app.classList.add("hidden");
-menu.classList.remove("hidden");
-back.classList.add("hidden");
-}
-
-/* 🔥 LISTA REAL GRANDE (500+) */
-const disorders=[
-
-/* 🧠 MENTALES */
-<script>
-
-/* 🔥 LISTA REAL GRANDE (500+) */
+/* 🔥 LISTA REAL GRANDE (PEGADA EXACTA) */
 const disorders = [
 
 /* 🧠 MENTALES (REALES DSM/CLÍNICOS) */
@@ -292,8 +262,29 @@ const disorders = [
 "Síndrome del impostor","Indecisión crónica","Falta de dirección",
 "Desesperanza","Pesimismo crónico","Falta de ambición",
 "Desorganización mental","Saturación mental","Agotamiento emocional"
-
 ];
+
+</script>
+
+<script>
+const start=document.getElementById("start");
+const menu=document.getElementById("menu");
+const app=document.getElementById("app");
+const card=document.getElementById("card");
+const back=document.getElementById("back");
+
+start.onclick=()=>{
+menu.classList.add("hidden");
+app.classList.remove("hidden");
+back.classList.remove("hidden");
+create();
+}
+
+back.onclick=()=>{
+app.classList.add("hidden");
+menu.classList.remove("hidden");
+back.classList.add("hidden");
+}
 
 function create(){
 card.innerHTML="";
@@ -317,7 +308,6 @@ card.appendChild(div);
 });
 }
 
-/* CONFIG ALERT */
 document.getElementById("config").onclick=()=>{
 let a=document.createElement("div");
 a.className="alert";
@@ -326,7 +316,6 @@ document.body.appendChild(a);
 setTimeout(()=>a.remove(),1000);
 }
 
-/* DARK MODE */
 const toggle=document.getElementById("toggle");
 let dark=false;
 toggle.onclick=()=>{
